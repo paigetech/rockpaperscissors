@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Hello...</title>
+<style type="text/css">
+#mainContent {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: xx-large;
+	font-weight: bold;
+	background-color: #E3F0FB;
+	border-radius: 4px;
+	padding: 10px;
+	text-align: center;
+}
+
+
+</style>
+</head>
+
+<body>
+<div id="mainContent">
+	<img id="choose" src="img/choosewisely.jpg" width=400/><br />
+	<div id="weapons">
+		<p id="result">Click a Weapon</p>
+		<p id="computer"></p>
+		<p id="player"></p>
+		<img id="rock" src="img/rock.jpeg" width=100 height=100 />
+		<img src="img/paper.jpeg" width=100 height=100>
+		<img src="img/scissors.jpeg" width=100 height=100>
+	</div>
+</div>
+<script> 
+	var player = "";
+	var computer = "";
+	var weapons = ["rock", "paper", "scissors"];
+	var gamePlayed = false;
+	
+	//computer selection
+	computer = weapons[Math.floor(Math.random() * 3) ];
+	
+	// Get the element, add a click listener...
+	document.getElementById("weapons").addEventListener("click", function(e) {
+		// e.target is the clicked element!
+		// If it was a list item
+		if(e.target) {
+			// item found!  Output the ID!
+			//alert("Item " + e.target.id + " was clicked!");
+			//set the wepaon to the player choice
+			player = e.target.id;
+			winner(playGame(player, computer));	
+			
+		}
+	});
+	
+	var playGame = function(player, computer){
+		var outcome = "";
+		if (player === computer) {
+			outcome = "it's a tie";
+		} else if (player === "rock" && computer === "scissors") {
+			outcome = "player wins!";
+		} else if (player === "scissors" && computer === "paper") {
+			outcome = "player wins!";
+		} else if (player === "paper" && computer === "rock") {
+			outcome = "player wins!";
+		} else {
+			outcome = "computer wins!";
+		}
+		return outcome;
+	};
+
+	var winner = function(outcome) {
+		document.getElementById("result").innerHTML = outcome;
+		document.getElementById("computer").innerHTML = "Computer picked " + computer;
+		document.getElementById("player").innerHTML = "Player picked " + player;
+		document.getElementById("choose").src = "http://wondermark.com/c/2010-09-14-657stop.gif";
+	}
+	//TODO write a reset function
+</script>
+
+</body>
+</html>
